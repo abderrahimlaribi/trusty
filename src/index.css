@@ -1,1 +1,21 @@
 @import "tailwindcss";
+/* custom scrollbar utility */
+.scrollbar-blue {
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #0074B7 transparent;
+  }
+  
+  /* Chrome, Edge & Safari */
+  .scrollbar-blue::-webkit-scrollbar {
+    width: 8px;
+  }
+  .scrollbar-blue::-webkit-scrollbar-track {
+    background: transparent; /* Remove the grey background */
+  }
+  .scrollbar-blue::-webkit-scrollbar-thumb {
+    background-color: #0074B7; /* Blue thumb */
+    border-radius: 4px;
+    border: 2px solid transparent; /* Optional: adds padding around the thumb */
+  }
+  

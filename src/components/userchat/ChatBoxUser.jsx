@@ -1,13 +1,22 @@
 import React, { useState, useRef, useEffect } from "react";
-import photo from "../assets/photo.svg";
-import vector from "../assets/vector.svg";
-import fluentVideo from "../assets/fluent_video-16-regular.svg";
-import menu from "../assets/bi_three-dots-vertical.svg";
-import paperClipOutlined from "../assets/ant-design_paper-clip-outlined.svg";
-import fluentEmojiLaugh from "../assets/fluent_emoji-laugh-16-regular.svg";
-import fluentCamera from "../assets/fluent_camera-24-regular.svg";
+import photo from "../../assets/photo.svg";
+import vector from "../../assets/vector.svg";
+import fluentVideo from "../../assets/fluent_video-16-regular.svg";
+import menu from "../../assets/bi_three-dots-vertical.svg";
+import paperClipOutlined from "../../assets/ant-design_paper-clip-outlined.svg";
+import fluentEmojiLaugh from "../../assets/fluent_emoji-laugh-16-regular.svg";
+import fluentCamera from "../../assets/fluent_camera-24-regular.svg";
 
-const ChatBox = ({ selectedChat, messages, onSend }) => {
+const ChatBoxUser = () => {
+  const [messages, setMessages] = useState([
+    { from: "left", text: "Hey There!", time: "Today, 8.30pm" },
+    { from: "left", text: "How are you?", time: "Today, 8.30pm" },
+    { from: "right", text: "Hello!", time: "Today, 8.33pm" },
+    { from: "right", text: "I am fine and how are you?", time: "Today, 8.34pm" },
+    { from: "left", text: "I am doing well, Can we meet tomorrow?", time: "Today, 8.36pm" },
+    { from: "right", text: "Yes Sure!", time: "Today, 8.58pm" },
+  ]);
+
   const [inputValue, setInputValue] = useState("");
   const messagesEndRef = useRef(null);
 
@@ -21,9 +30,14 @@ const ChatBox = ({ selectedChat, messages, onSend }) => {
 
   const handleSend = () => {
     if (!inputValue.trim()) return;
-    const time = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
+    const time = new Date().toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
     const newMessage = { from: "right", text: inputValue, time: `Today, ${time}` };
-    onSend(newMessage);
+
+    setMessages((prev) => [...prev, newMessage]);
     setInputValue("");
   };
 
@@ -31,28 +45,28 @@ const ChatBox = ({ selectedChat, messages, onSend }) => {
     const file = e.target.files[0];
     if (!file) return;
 
-    const time = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    const time = new Date().toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
     const isImage = file.type.startsWith("image/");
 
     if (isImage) {
       const reader = new FileReader();
       reader.onload = () => {
-        onSend({ from: "right", image: reader.result, time: `Today, ${time}` });
+        setMessages((prev) => [
+          ...prev,
+          { from: "right", image: reader.result, time: `Today, ${time}` },
+        ]);
       };
       reader.readAsDataURL(file);
     } else {
-      onSend({ from: "right", text: `📎 ${file.name}`, time: `Today, ${time}` });
+      setMessages((prev) => [
+        ...prev,
+        { from: "right", text: `📎 ${file.name}`, time: `Today, ${time}` },
+      ]);
     }
   };
-
-  if (!selectedChat) {
-    return (
-      <div className="flex-1 flex items-center justify-center text-gray-500 text-xl">
-        Select a chat to start messaging
-      </div>
-    );
-  }
-  
 
   return (
     <div className="w-240 my-7 bg-white rounded-xl shadow-md">
@@ -61,7 +75,7 @@ const ChatBox = ({ selectedChat, messages, onSend }) => {
         <div className="flex items-center gap-2">
           <img src={photo} alt="Avatar" className="w-10 h-10 rounded-full" />
           <div>
-            <div className="font-semibold text-2xl text-gray-800">{selectedChat?.name}</div>
+            <div className="font-semibold text-2xl text-gray-800">Anil</div>
             <div className="text-sm text-gray-500">Online - Last seen, 2.02pm</div>
           </div>
         </div>
@@ -122,8 +136,6 @@ const ChatBox = ({ selectedChat, messages, onSend }) => {
       </div>
     </div>
   );
-
-  
 };
 
-export default ChatBox;
+export default ChatBoxUser;
