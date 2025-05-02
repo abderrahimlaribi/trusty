@@ -18,7 +18,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/ResetPassword" element={<ResetPassword />} />
         <Route path="/SignUpUser" element={<SignUpUser />} />
-        <Route path="/UserProfile" element={<UserProfile />} />
         <Route path="/HomePage" element={<HomePage />} />
         <Route path="/AdminDashboard" element={<AdminDashboard />} />
 

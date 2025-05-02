@@ -172,7 +172,6 @@ export default function NotificationDashboard() {
   </div>
 )}
 
-      )}
     </div>
   );
 }
