@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Sidebar from '../../components/User/Sidebar.jsx';
+import Sidebar from '../../components/Sidebar.jsx';
 import NotificationsPanel from "../../components/User/Notification.jsx";
 import ProfileDetails from "../../components/User/UserProfile.jsx";
 

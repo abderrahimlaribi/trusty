@@ -3,7 +3,7 @@ import UserProfile from '../../components/User/UserProfile.jsx';
 
 
 
-export default function Homepage() {
+export default function Profile() {
   return (
     <>
       <UserProfile />
